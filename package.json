@@ -1,0 +1,25 @@
+{
+  "name": "web-components-poc",
+  "version": "1.0.0",
+  "description": "Web Components POC",
+  "main": "index.js",
+  "scripts": {
+    "start-material-web": "web-dev-server --node-resolve --open ./material-web/index.html",
+    "start-hybrids": "web-dev-server --node-resolve --open ./hybrids/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web-components"
+  ],
+  "author": "Eoin Traynor",
+  "license": "ISC",
+  "dependencies": {
+    "@material/mwc-button": "^0.25.3",
+    "@material/mwc-textfield": "^0.25.3",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "hybrids": "^7.0.0"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.28"
+  }
+}
