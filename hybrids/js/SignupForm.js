@@ -10,24 +10,20 @@ function formSubmission(host, event) {
   // sendData('api.com/create', { value: host.value });
 }
 
-function updateFirstName(host, event) {
-  host.firstName = event.target.value
-}
-
 export default define({
   tag: "hs-signup-form",
-  name: '',
   firstName: '',
   lastName: '',
   email: '',
-  render: ({name, firstName }) => html`
+  render: ({ firstName, lastName, email }) => html`
     <div>
-      <h1>
-        Hello, ${name}!
-      <h1>
       <form onsubmit="${formSubmission}">
         <label for="first-name">First Name</label>
-        <input type="text" defaultValue="${firstName}" id="first-name" name="first-name" required oninput="${updateFirstName}">
+        <input type="text" defaultValue="${firstName}" id="first-name" name="first-name" required onchange="${html.set('firstName')}">
+        <label for="first-name">First Name</label>
+        <input type="text" defaultValue="${lastName}" id="last-name" name="last-name" required onchange="${html.set('lastName')}">
+        <label for="email">Email</label>
+        <input type="email" defaultValue="${email}" id="email" name="email" required onchange="${html.set('email')}">
         <button type="submit">Submit</button>
       </form>
     </div>
