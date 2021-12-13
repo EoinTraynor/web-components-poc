@@ -1,3 +1,4 @@
+/*
 // Importing this module registers <mwc-button> as an element that you
 // can use in this page.
 //
@@ -11,4 +12,14 @@ import '@material/mwc-button';
 const button = document.querySelector('#myButton');
 button.addEventListener('click', () => {
   alert('You clicked!');
+});
+*/
+
+import { define, html } from "hybrids";
+
+export default define.compile({
+  name: "",
+  render: ({ name }) => html`
+    <div>Hello ${name}!</div>
+  `,
 });
