@@ -2,6 +2,7 @@
 
 ### Pros
 - Data binding pretty straightforward.
+- Support for Scoped Styles, Nested Template Styles and External Stylesheets
 
 ## Resources
 - [Overview of the Web components in 2021](https://exyte.com/blog/web-components-technology)
