@@ -5,9 +5,9 @@ function updateName(host, event) {
 }
 
 export default define.compile({
-  firstName: "",
-  render: ({ name }) => html`
+  email: "",
+  render: ({ value }) => html`
     <label for="first-name">First Name</label>
-    <input type="text" defaultValue="${name}" id="first-name" name="first-name" required oninput=-"${updateFirstName}">
+    <input type="text" defaultValue="${value}" id="first-name" name="first-name" required oninput="${updateName}">
   `,
 });
