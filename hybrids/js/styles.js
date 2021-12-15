@@ -105,7 +105,7 @@ export const commonStyles = html`
     #submit {
       display: block;
       border: 0;
-      width: 25%;
+      width: 100%;
       height: 60px;
       margin: 30px auto 0;
       background: #eee;

@@ -1,11 +1,21 @@
 import { hasEmoji, hasNumbers, hasSpecialCharacters } from './matchers';
 
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+const validateEmail = async (email) => {
+  const emailValidationEndpoint = 'https://api.hubspotqa.com/signup/v1/validation/email';
+    const response = await fetch(emailValidationEndpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      cache: 'no-cache',
+      // credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      referrerPolicy: 'strict-origin-when-cross-origin',
+      body: JSON.stringify({email}),
+    });
+    // check for 200 response
+    return response.status === 200;
 };
 
 const validateName = value => {
@@ -17,13 +27,12 @@ const validateName = value => {
   hasSpecialCharacters(value) ||
   hasNumbers(value) ||
   hasEmoji(value);
-
   return !invalid;
 };
 
-export function validateForm(formData) {
+export const validateForm = async (formData) => {
   const {firstName, lastName, email} = formData;
-  const isValidEmail =  validateEmail(email);
+  const isValidEmail = await validateEmail(email);
   const isValidFirstName =  validateName(firstName);
   const isValidLastName =  validateName(lastName);
   return (isValidEmail && isValidFirstName && isValidLastName);

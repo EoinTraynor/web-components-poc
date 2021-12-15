@@ -1,16 +1,17 @@
 import { define, html } from "hybrids";
+import NestedCons from './NestedCons';
+import NestedPros from './NestedPros';
 import { commonStyles } from "./styles";
-import SubmitButton from './SubmitButton';
 import { validateForm } from './utils/formUtils';
 
-customElements.define("submit-button", SubmitButton);
+customElements.define("nested-pros", NestedPros);
+customElements.define("nested-cons", NestedCons);
 
-const FORM_ENDPOINT = 'https://api.hubspotqa.com/signup/v1/';
 
-const formSubmission = (host, event) => {
+const formSubmission = async (host, event) => {
   event.preventDefault();
   const {firstName, lastName, email} = host;
-  const isFormValid = validateForm({firstName, lastName, email});
+  const isFormValid = await validateForm({firstName, lastName, email});
   if (isFormValid) {
     console.log('Form Submitted');
   } else {
@@ -37,6 +38,10 @@ export default define({
       <div id="subscribeBox">
         <h2><span class="thin">Web Components POC</span> Hybrids</h2>
         <p>The component model is based on plain objects and pure functions, still using the Web Components API under the hood</p>
+
+        <nested-pros name="Pros"></nested-pros>
+        <nested-cons name="Cons"></nested-cons>
+
         <form class="subscribeForm" name="Subscription Form" onsubmit="${formSubmission}">
           <label for="first-name">First Name</label>
           <input type="text" defaultValue="${firstName}" id="first-name" name="first-name" required onchange="${html.set('firstName')}">
@@ -44,11 +49,15 @@ export default define({
           <input type="text" defaultValue="${lastName}" id="last-name" name="last-name" required onchange="${html.set('lastName')}">
           <label for="email">Email</label>
           <input type="email" defaultValue="${email}" id="email" name="email" required onchange="${html.set('email')}">
+
+          <!-- Nested Templates -->
           ${submit(clickCallback)}
+
         </form>
       </div> <!-- end subscribeBox -->
     </div> <!-- end subscribeBox -->
     <!-- External Stylesheets -->
+
     ${commonStyles}
   `
 });
